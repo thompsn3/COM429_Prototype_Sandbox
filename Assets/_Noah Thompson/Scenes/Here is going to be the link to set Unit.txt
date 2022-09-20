@@ -1,0 +1,23 @@
+Here is going to be the link to set Unity up for online multiplayer(How to: Unity Online Multiplayer). The script will be pushed to the repo for NetworkButtons.cs 
+
+
+ Notes on it @6:26 for the time. 
+Change the PlayerController from being MonoBehavior to NetworkBehavior
+Add a function called public override void OnNetworkSpawn(){
+} and add if(!IsOwner) Destroy(this);
+Add a new script called PlayerNetwork
+Add private readonly NetworkVariable<Vector3> _netPos = new NetworkVariable<Vector3>(writePerm: NetworkVariableWritePermission.Owner);
+
+Private readonly NetworkVariable<Quaternion> _netRot = new NetworkVariable<Vector3>(writePerm: NetworkVariableWritePermission.Owner);
+
+Change mono to networkbehavior
+
+If (IsOwner) {
+	_netPos.Value = transform.position
+	_netRot.Value = transform.rotation
+}
+Else {
+	Transform.position = _netPos.Value
+	Transform.rotation = _netRot.Value
+
+**HE CHANGES THIS** Watch the video
